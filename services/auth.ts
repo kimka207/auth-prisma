@@ -1,8 +1,12 @@
+"use server";
+
 import { db } from "@/lib/db";
 
-export const getUserByUsername = async (username: string) => {
+export const getUserByUsername = async (email: string) => {
   try {
-    const existingUser = await db.user.findUnique({ where: { username } });
+    const existingUser = await db.user.findUnique({
+      where: { email },
+    });
     return existingUser;
   } catch (error) {
     return null;
@@ -11,7 +15,7 @@ export const getUserByUsername = async (username: string) => {
 
 export const getUserByID = async (id: string) => {
   try {
-    const existingUser = await db.user.findUnique({ where: { id } });
+    const existingUser = await db.user.findFirst({ where: { id } });
     return existingUser;
   } catch (error) {
     return null;

@@ -19,7 +19,7 @@ export const registerUser = async (values: z.infer<typeof registerSchema>) => {
   const { fullName, username, password, email } = validUser.data;
 
   try {
-    const existingUser = await getUserByUsername(username);
+    const existingUser = await getUserByUsername(email);
 
     if (existingUser) {
       return { error: "User Exists" };
@@ -46,11 +46,11 @@ export const loginUser = async (values: z.infer<typeof loginSchema>) => {
     throw { error: "user required" };
   }
 
-  const { username, password } = validUser.data;
+  const { email, password } = validUser.data;
 
   try {
     await signIn("credentials", {
-      username,
+      email,
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
     });

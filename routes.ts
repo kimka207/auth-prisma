@@ -1,4 +1,4 @@
-const authRoutes = ["/auth/login", "/auth/register"];
+const authRoutes = ["/auth/login", "/auth/register", "/auth/error"];
 
 // do not require authenitication
 const publicRoutes = ["/"];

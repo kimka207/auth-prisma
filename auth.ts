@@ -17,6 +17,12 @@ declare module "next-auth" {
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(db),
+  trustHost: true,
+  secret: process.env.AUTH_SECRET,
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error",
+  },
   session: { strategy: "jwt" },
   callbacks: {
     async session({ token, session }) {

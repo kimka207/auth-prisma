@@ -10,12 +10,12 @@ export default {
   providers: [
     GithubProvider({
       name: "github",
-      clientId: process.env.GITHUB_CLIENT_KEY,
+      clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
     GoogleProvider({
       name: "google",
-      clientId: process.env.GOOGLE_CLIENT_KEY,
+      clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Credentials({
@@ -26,8 +26,8 @@ export default {
           return null;
         }
 
-        const { username, password } = validCredentials.data;
-        const user = await getUserByUsername(username);
+        const { password, email } = validCredentials.data;
+        const user = await getUserByUsername(email);
 
         if (!user || !user?.password) {
           return null;
@@ -43,5 +43,4 @@ export default {
       },
     }),
   ],
-  secret: process.env.AUTH_SECRET,
 } satisfies NextAuthConfig;
